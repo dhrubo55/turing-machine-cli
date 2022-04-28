@@ -20,4 +20,5 @@ jobs:
           run: |
             ls -la    
         - name: Build
-          run: ./mvnw package
+          run: |
+            mvn package
