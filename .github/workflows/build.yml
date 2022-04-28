@@ -16,5 +16,8 @@ jobs:
           with:
             graalvm-version: 21.2.0
             java-version: 11
+        - name: Open Web Client Directory
+          run: |
+            ls -la    
         - name: Build
           run: ./mvnw package
