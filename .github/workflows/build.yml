@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
     steps:
         - name: Check out repository
           uses: actions/checkout@v2
@@ -22,3 +22,12 @@ jobs:
         - name: Build
           run: |
             mvn package
+        - name: Rename the artifact to OS-unique name
+          shell: bash
+          run: |
+            value=`cp build/graal/TuringMachine build/graal/TuringMachine-${{ matrix.os }}`
+        - name: Publish artifact
+          uses: actions/upload-artifact@master
+          with:
+            name: TuringMachine-${{ matrix.os }}
+            path: build/graal
