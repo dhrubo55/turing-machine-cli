@@ -10,14 +10,16 @@ jobs:
         os: [ubuntu-latest, macOS-latest]
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: DeLaGuardo/setup-graalvm@2.0
+    - uses: actions/checkout@latest
+    - uses: DeLaGuardo/setup-graalvm@5.0
       with:
-        graalvm-version: '19.3.0.2.java11'
+        graalvm-version: '21.0.0.2'
+        java: 'java11'
+        arch: 'amd64'
     - run: java -version
     - run: gu install native-image
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./mvnw build
     - name: Rename the artifact to OS-unique name
       shell: bash
       run: |
